@@ -50,7 +50,7 @@
 
     > onStart()와 onStop() 호출 사이의 액티비티 실행 시기이다. 이 시기동안 액티비티는 자신을 사용자에게 화면으로 보여줄 수 있다.
 
-  + > **포그라운드 생애(Foreground Lifetime)**
+  +  **포그라운드 생애(Foreground Lifetime)**
     >
     > onResume() 메서드 호출과 onPause() 호출 사이의 액티비티 실행 시기를 의미한다.
 
@@ -96,7 +96,7 @@
 
     > onCreate() 메서드처럼 이 메서드도 이전 상태 데이터를 포함하는 Bundle 객체를 매개변수로 받는다. 주의할 점은 OnRestoreInstanceState()는 정상적인 상황에서는 호출되지 않는다. 예시로 디바이스 회전시, 강제종료 후 재 시작 할 때 발생한다.
 
-  + > **onSaveInstanceState(Bundle outState)**
+  +  **onSaveInstanceState(Bundle outState)**
     >
     > 현재의 동적 상태 데이터가 저장될 수 있게끔 액티비티가 소멸되기 전에 호출된다. 여기서 동적 상태 데이터는 대게 사용자 인터페이스와 관련된 것들이다. 이 메서드도 Bundle 객체를 매개 변수로 받으며, 저장되어야 하는 상태 데이터를 Bundle 객체에 넣는다. 그리고 이 Bundle 객체는 액티비티가 다시 시작될 때 onCreate()와  onRestoreInstanceState() 메서드에 전달된다. 동적 상태 데이터가 저장될 필요가 있다는 것을 런타임이 알 경우에만 이 메서드가 호출된다는 점에 유의하자.
 
