@@ -56,7 +56,8 @@
 
     액티비티는 자신의 전체 생애 동안 포그라운드와 가시적 생애를 여러 번 거칠 수 있다. 아래의 그림은 액티비티의 생애와 생명주기 메서드들의 개념을 보여준다.
 
-  ![image-20210921114949540](C:\Users\user\AppData\Roaming\Typora\typora-user-images\image-20210921114949540.png)
+  ![생명주기](https://user-images.githubusercontent.com/90879448/134161043-9856aca1-87c1-4b33-aa18-70b813db83c4.png)
+
 
   
 
