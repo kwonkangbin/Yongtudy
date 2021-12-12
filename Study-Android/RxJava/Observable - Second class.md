@@ -86,3 +86,19 @@ io.reactivex.exceptions.OnErrorNotImplementedException: The exception was not ha
 
 ## Maybe
 
+Maybe는 Single 클래스와 비슷하다. 최대 데이터를 하나만 가질 수 있기 때문이다. 하지만 데이터 발행 없이 데이터 발생을 완료 할 수 있다. 즉, Maybe 클래스는 Single클래스에 onComplete 이벤트가 추가된 형태라고 볼 수 있다.
+
+![img](https://blog.kakaocdn.net/dn/bYTLNI/btqzbEEnALs/QBRyz51CvJJyK6MzvxwNM0/img.png)
+
+초록색 체크 모양은 onSuccess 이벤트고 X는 onError, | 는 onComplete 이벤트에 해당한다.
+
+Maybe 객체는  Maybe 클래스로 생성할 수 있지만, 보통 Observable의 특정 연사자를 통해 생성 할 때가 많다. 또한 Maybe객체를 생성할 수 있는 리액티브 연산자에는 elementAt(), firstElement() 등등 있지만 다음에 더 알아보도록 하자!
+
+--------------------------------
+
+## 마치며..
+
+오늘은 Single과 Maybe에 대해서 알아봤다. 둘 다 데이터를 하나만 발행 할 수 있다. Single은 발행과 동시에 종료된다는 것이다.(종료 시onSuccess호출 됨)
+
+ Maybe는 데이터 발행없이 데이터 발생을 완료할 수 있다.  
+
