@@ -171,7 +171,8 @@ fun <T : Any> Iterable<T>.toObservable(): Observable<T> = Observable.fromIterabl
 
 예를 들어 HashSet,     BlockQueue 객체를 구현하는 ArrayBlockingQueue도 가능하다.
 
-<img src="C:\Users\user\AppData\Roaming\Typora\typora-user-images\image-20211212142313539.png" alt="image-20211212142313539" style="zoom:80%;" /><img src="C:\Users\user\AppData\Roaming\Typora\typora-user-images\image-20211212142335690.png" alt="image-20211212142335690" style="zoom: 67%;" />
+<img src="C:\Users\user\AppData\Roaming\Typora\typora-user-images\image-20211212142313539.png" alt="image-20211212142313539" style="zoom:80%;" /><img src="https://user-images.githubusercontent.com/90879448/145701970-0178a03b-4db9-4a08-ae64-c7d5aa03a639.png" alt="image-20211212142335690" style="zoom: 67%;" />
+
 
 (왼쪽이 HashSet 오른쪽이 BlockQueue 객체를 구현하는 ArrayBlockingQueue이다. )
 
