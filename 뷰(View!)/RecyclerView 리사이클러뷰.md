@@ -84,5 +84,8 @@ override fun onBindViewHolder(holder: RocketDataViewHolder, position: Int) {
 
 그럼 오늘은 여기까지 하고 모두 리사이클러뷰에 대한 이해를 하고 쓰길 바란다. 끝~
 
+코드 출처: https://github.com/Leesin0222/VOYAGER/blob/main/voyager/app/src/main/java/com/yongjincompany/voyager/ui/home/adapter/RocketListAdapter.kt
+내가 짠 코드에서 가져와보았다.
+
 
 
