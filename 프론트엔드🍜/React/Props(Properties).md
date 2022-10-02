@@ -6,7 +6,7 @@ pops는 properties의 줄임말입니다. 우리가 어떠한 값들을 컴포�
 
 ## 단일 Props 전달 예시
 
-```react
+```js
 //App.js
 import React from 'react';
 import Chicken from './Chicken';
@@ -40,7 +40,7 @@ App.js에서 Chicken.js로 props.name을 넘겨주고 Chicken.js에서는 div태
 
 ## 여러개의 props 전달 예시
 
-```react
+```js
 //App.js
 import React from 'react';
 import Chicken from './Chicken';
@@ -77,7 +77,7 @@ export default Chicken;
 
 그럼  `Chicken.js` 코드를 바꿔보자.
 
-```react
+```js
 import React from 'react';
 
 function Chicken({color, name, menu}) {
@@ -99,7 +99,7 @@ export default Chicken;
 
 컴포넌트에 defaultProps라는 값을 설정해놓으면  컴포넌트에 props를 사용하지 않았을 때 들어갈 값을 설정할 수 있다. 
 
-```react
+```js
 //Chicken.js
 import React from 'react';
 
@@ -118,7 +118,7 @@ export default Chicken;
 
 이제 `App.js`에서 name이 빠진 Chickien 컴포넌트를 렌더링을 하면 
 
-```react
+```js
 //App.js
 import React from 'react';
 import Chicken from './Chicken';
@@ -147,7 +147,7 @@ export default App;
 
 Wrapper.js를 맹들어보죠.
 
-```react
+```js
 //Wrapper.js
 import React from 'react';
 
