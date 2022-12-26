@@ -59,7 +59,7 @@ fun go(): Nothing {
 }
 ```
 
-예시 코드를 보면 알 수 있듯이 Nothing은 throw를 함수가 종류되는 것으로 보지 않기 때문에 return으로 받아들이지 않는다. 그래서 저 코드(1)를 실행했을 때 IllegalArgumentException을 실행시키며 에러가 나게된다.
+예시 코드를 보면 알 수 있듯이 Nothing은 throw를 함수가 종료되는 것으로 보지 않기 때문에 return으로 받아들이지 않는다.(덧붙히자면 throw는 표현식이기 때문에 쓸 수 있다.) 그래서 저 코드(1)를 실행했을 때 IllegalArgumentException을 실행시키며 에러가 나게된다.
 
 코드(2)를 보자 음.... 무한루프다. 반환이 아무것도 되지 않을 것이다. Nothing을 쓰자...(?...???????)
 
