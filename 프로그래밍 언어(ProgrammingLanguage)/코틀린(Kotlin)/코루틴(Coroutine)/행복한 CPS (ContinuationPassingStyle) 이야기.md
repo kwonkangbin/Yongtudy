@@ -73,7 +73,7 @@ fun getAndroidApp(api: QueenLiveApi, completion: Continuation<Any?>) {
 		val guestApp = api.fetchGuest(sellerApp)
 		val masterWeb = api.fetchMaster(guestWeb)
 		val androidApplication = api.fetchAndroidApp(masterWeb)
-		Log.d("드디어 퀸라이브 앱을 손에 넣었다!")
+		Log.d("드디어 안드로이드 앱을 손에 넣었다!")
 		completion.resume(androidApllication)
 }
 ```
