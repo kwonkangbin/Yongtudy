@@ -50,31 +50,31 @@ Continuation은 kotlin 컴파일러가 suspend 함수의 시그니처를 변경�
 
 1. Continuation 객체가 기존 suspend 함수의 파라미터에 추가되고 suspend 키워드가 사라진다.
 2. 이 객체는 suspend 함수 계산의 결과를 호출한 Coroutine에 전달하는데 사용된다.
-3. 또한 함수의 리턴 타입 또한 queenLiveApp에서 Unit으로 변경되었는데, 결과는 resume 함수의 매개변수를 통해 얻을 수 있게 된다.
+3. 또한 함수의 리턴 타입 또한 androidApp에서 Unit으로 변경되었는데, 결과는 resume 함수의 매개변수를 통해 얻을 수 있게 된다.
 
 Let’s Code!
 
 ```kotlin
-suspend fun getQueenLiveApp(api: QueenLiveApi): queenLiveApp {
+suspend fun getAndroidApp(api: AndroidApi): AndroidApp {
 		val sellerApp = api.fetchSeller()
 		val guestApp = api.fetchGuest(sellerApp)
 		val masterWeb = api.fetchMaster(guestWeb)
-		val queenLiveApplication = api.fetchQueenLiveApp(masterWeb)
+		val androidApplication = api.fetchQueenLiveApp(masterWeb)
 		Log.d("드디어 퀸라이브 앱을 손에 넣었다!")
-		return queenLiveApplication
+		return androidApplication
 }
 ```
 
 이랬던 코드가
 
 ```kotlin
-fun getQueenLiveApp(api: QueenLiveApi, completion: Continuation<Any?>) {
+fun getAndroidApp(api: QueenLiveApi, completion: Continuation<Any?>) {
 		val sellerApp = api.fetchSeller()
 		val guestApp = api.fetchGuest(sellerApp)
 		val masterWeb = api.fetchMaster(guestWeb)
-		val queenLiveApplication = api.fetchQueenLiveApp(masterWeb)
+		val androidApplication = api.fetchAndroidApp(masterWeb)
 		Log.d("드디어 퀸라이브 앱을 손에 넣었다!")
-		completion.resume(queenLiveApllication)
+		completion.resume(androidApllication)
 }
 ```
 
@@ -87,15 +87,15 @@ fun getQueenLiveApp(api: QueenLiveApi, completion: Continuation<Any?>) {
 이럴 땐… Let’s Code!
 
 ```kotlin
-fun getQueenLiveApp(api: QueenLiveApi, completion: Continuation<Any?>) {
+fun getAndroidApp(api: AndroidApi, completion: Continuation<Any?>) {
 		val sellerApp = api.fetchSeller()
 		val guestApp = api.fetchGuest(sellerApp)
 		val masterWeb = api.fetchMaster(guestApp)
-		val queenLiveApplication = api.fetchQueenLiveApp(masterWeb)
+		val androidApplication = api.fetchAndroidApp(masterWeb)
 		Log.d("드디어 퀸라이브 앱을 손에 넣었다!")
-		completion.resume(queenLiveApllication)
+		completion.resume(androidApllication)
 }
-fun getQueenLiveApp(api: QueenLiveApi, completion: Continuation<Any?>) {
+fun getAndroidApp(api: AndroidApi, completion: Continuation<Any?>) {
 		when(label) {
 				0 -> // Label 0
 					  val sellerApp = api.fetchSeller()// suspend
@@ -107,11 +107,11 @@ fun getQueenLiveApp(api: QueenLiveApi, completion: Continuation<Any?>) {
 						val masterWeb = api.fetchMaster(guestApp)// suspend
 
 				3 -> // Label 3
-						val queenLiveApplication = api.fetchQueenLiveApp(masterWeb)// suspend
+						val androidApplication = api.fetchAndroidApp(masterWeb)// suspend
 					
 				4 -> { // Label 4
-						Log.d("드디어 퀸라이브 앱을 손에 넣었다!")
-						completion.resume(queenLiveApllication)
+						Log.d("드디어 안드로이드 앱을 손에 넣었다!")
+						completion.resume(AndroidApllication)
 				}
 		}
 }
@@ -126,20 +126,20 @@ kotlin 컴파일러는 모든 중단 가능한 지점을 찾아 when으로 표�
 kotlin 컴파일러는 기존에 만들었던 함수 안에 클래스를 생성한다. 이 클래스는 Continuation의 자식개념인 CoroutineImpl을 구현하며, 기존의 suspend 함수에 선언된 변수들과, 실행 결과인 Result, 현재의 진행 상태인 label을 가지고 있다.
 
 ```kotlin
-fun getQueenLiveApp(api: QueenLiveApi, completion: Continuation<Any?>) {
+fun getAndroidApp(api: AndroidApi, completion: Continuation<Any?>) {
 		class GetQueenLiveAppStateMachine(completion: Continuation<Any?>): CoroutineImpl(completion) {
 				//기존의 함수 내부에 선언된 변수들들들
 				var sellerApp : SellerApp? = null
 				var guestApp : GuestApp? = null
 				var masterWeb = MasterWeb? = null
-				var queenLiveApplication : QueenLiveApplication? = null
+				var androidApplication : AndroidApplication? = null
 
 				var result: Any? = null
 				var label: Int = 0
 
 				override fun invokeSuspend(result: Any?) {
 						this.result = result
-						getQueenLiveApp(api, this)
+						getAndroidApp(api, this)
 				}
 		}
 } 
@@ -148,8 +148,8 @@ fun getQueenLiveApp(api: QueenLiveApi, completion: Continuation<Any?>) {
 그럼 이 클래스가 어떻게 사용되는지 알아보러 Let’s Code!
 
 ```kotlin
-fun getQueenLive(api: QueenLiveApi, completion: Continuation<Any?>) {
-		val continuation = completion as? GetQueenLiveStateMachine ?: GetQueenLiveStateMashine
+fun getAndroid(api: AndroidApi, completion: Continuation<Any?>) {
+		val continuation = completion as? GetAndroidStateMachine ?: GetAndroidStateMashine
 		(completion)
 
 		when (continuation.label) {
@@ -174,13 +174,13 @@ fun getQueenLive(api: QueenLiveApi, completion: Continuation<Any?>) {
 						throwOnFailue(continuation.result)
 						continuation.masterWeb = continuation.result as 
 						continuation.label = 4
-						api.fetcQueenLiveApp(continuation.masterWeb, continuation) //suspend
+						api.fetchAndroidApp(continuation.masterWeb, continuation) //suspend
 				}
 				4 -> {
 						throwOnFailue(continuation.result)
-						continuation.queenLiveApplication = continuation.result as QueenLiveApplication
-						Log.d("드디어 퀸라이브 앱을 손에 넣었다!")
-						completion.resume(continuation.queenLiveApllication)
+						continuation.androidApplication = continuation.result as QueenLiveApplication
+						Log.d("드디어 안드로이드 앱을 손에 넣었다!")
+						completion.resume(continuation.androidApllication)
 				}
 				else -> throw IllegalStateException
 		}
@@ -190,7 +190,7 @@ fun getQueenLive(api: QueenLiveApi, completion: Continuation<Any?>) {
 
 아까 3번째 단계에서 일시 중단 가능한 지점을 나눈 이유가 이 것 때문인데, Kotlin 컴파일러가 생성해준 GetQueenLiveAppStateMachine의 label이 when 안에서 사용되는데, 일시 중단한 지점에 따라 코드를 나누고 label로 그 코드를 구분했으니, 이제 resume하기 위해 label을 사용할 차례이다. 각 label분기에서 label의 값을 증분 시켜서 다음 실행할 지점을 가리키고, 이러한 절차를 거쳐 resume이 된다.
 
-한편 GetQueenLiveAppStateMachine을 살펴보면 기존에 suspend 함수 내부에 선언된 변수들이 null로 초기화된 모습을 볼 수가 있는데, 이 또한 when 절안에서 resume시 suspend되고 실행된 작업의 결과가 continuation.result로 받아오는 모습도 확인할 수가 있다. continuation.result를 각 타입으로 캐스팅해서 함수 내부에서 선언된 변수들을 관리하고 있다. 이렇게 각 코드 블록을 하나하나 실행할 때마다 함수의 상태가 점점 누적되고 마지막 resume을 통해 최종 값이 전달되게 된다. 이렇게 하면 하나의 Coroutine 코드가 끝나게 된다.
+한편 GetAndroidAppStateMachine을 살펴보면 기존에 suspend 함수 내부에 선언된 변수들이 null로 초기화된 모습을 볼 수가 있는데, 이 또한 when 절안에서 resume시 suspend되고 실행된 작업의 결과가 continuation.result로 받아오는 모습도 확인할 수가 있다. continuation.result를 각 타입으로 캐스팅해서 함수 내부에서 선언된 변수들을 관리하고 있다. 이렇게 각 코드 블록을 하나하나 실행할 때마다 함수의 상태가 점점 누적되고 마지막 resume을 통해 최종 값이 전달되게 된다. 이렇게 하면 하나의 Coroutine 코드가 끝나게 된다.
 
 이 글로써 Kotlin 컴파일러가 suspend 키워드를 동작하는 과정에 대해 알아보았다. 머리가 아프고 완벽히 이해하진 못했지만 이런 흐름이구나.. 하고 이해하고 다음에 더 자세히 알아봐야겠다…..suspend가 이렇게 복잡한 과정을 거친다…. 이제부터 suspned 쓸 때마다 JetBrain본사를 향해 절 한 번씩 하고 쓰길 바란다…
 
